@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H+ 后台主题UI框架 - Bootstrap Table</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户列表</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="example">
+                            <table id="exampleTableFromData" data-mobile-responsive="true">
+                                <thead>
+                                    <tr>
+                                        <th data-field="id">ID</th>
+                                        <th data-field="name">姓名</th>
+                                        <th data-field="createdAt">创建时间</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="/js/content.js?v=1.0.0"></script>
+
+
+    <!-- Bootstrap table -->
+    <script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+    <!--统计代码，可删除-->
+    <script type="text/javascript">
+        $(function () {
+            $('#exampleTableFromData').bootstrapTable({
+                url: 'http://localhost:3001/pc' + '/home/getUser',         //请求后台的URL（*）
+                method: 'get',                      //请求方式（*）
+                // toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortOrder: "asc",                   //排序方式
+                queryParamsType: '',
+                paginationShowPageGo: true,
+                showJumpto: true,
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                // queryParams:queryParams,//请求服务器时所传的参数
+                sidePagination: 'server',//指定服务器端分页
+                pageSize: 5,//单页记录数
+                pageList: [2, 3, 4, 5],//分页步进值
+                smartDisplay: false,
+                search: true, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                silent: true,
+                showColumns: true,                  //是否显示所有的列
+                showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 2,             //最少允许的列数
+                uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+            })
+        })
+    </script>
+</body>
+
+</html>

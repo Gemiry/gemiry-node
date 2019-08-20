@@ -1,0 +1,11 @@
+const router = require('koa-router')()
+const AdminController = require('../controller/pc/admin')
+const HomeController = require('../controller/pc/home')
+const TestController = require('../controller/pc/buy')
+router.prefix('/pc')
+router.get('/test/getUserPrice', TestController.getUser)
+router.post('/test/createOrder', TestController.create)
+router.get('/home/getUser', HomeController.getUser)
+router.post('/login/signUp', AdminController.create)
+router.post('/login/signIn', AdminController.verifyUser)
+module.exports = router

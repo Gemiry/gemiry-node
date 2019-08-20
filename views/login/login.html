@@ -1,0 +1,100 @@
+{% extends "views/template/header.html" %}
+{% block header %}
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="left_login"></div>
+    <div class="right_login">
+        <div class="login_from">
+            <div class="logo"></div>
+            <div class="welcome">
+                <p>Welcome</p>
+                <p>LANGPEI CRM</p>
+            </div>
+            <form class="form">
+                <div class="acc showMsg">
+                    <input type="text" name="" placeholder="账号"  id="acc">
+                    <p ><span class="err">请输入账号</span></p>
+                </div>
+                <div class="psw">
+                    <input type="password" name="" placeholder="密码"  id="psw">
+                    <p ><span class="err">请输入密码</span><span class="forget">忘记密码？</span></p>
+                </div>
+                <div class="login">
+                    <div class="loginBtn pulse" id="signIn">登录</div>
+                    <div class="loginBtn pulse" id="signUp">注册</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layer">
+    <div class="content">
+    <i aria-label="icon: info-circle" class="anticon anticon-info-circle"><svg viewBox="64 64 896 896" class="" data-icon="info-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"></path></svg></i><span class="layerText">测试</span></div>
+    </div>
+    <a href="" class="down">谷歌浏览器下载</a>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('.loginBtn').on('click',function(){
+			$(this).removeClass('amnimate').addClass('amnimate')
+			clearTimeout(time)
+			var time = setTimeout(function(){
+				$('.loginBtn').removeClass('amnimate')
+			},1000)
+		})
+		$('#acc').on('input',function(){
+			var value = $(this).val()
+		})
+		$('#psw').on('input',function(){
+			var pas = $(this).val()
+		})
+		$('.forget').on('click',function(){
+			$('.layer').addClass('show')
+			$('.layerText').text('请联系管理员')
+			setTimeout(() => {
+				$('.layer').removeClass('show')
+			}, 1500);
+		})
+		if(Math.random()>0.5){
+			$('.left_login').toggleClass('bg2')
+        }
+        //注册
+        $('#signUp').on('click',function(){
+            let name = $('#acc').val()
+            let password = $('#psw').val()
+            $.ajax({
+                url:'http://localhost:3001/pc'+'/login/signUp',
+                method:'post',
+                dataType:'json',
+                data:{
+                    name:name,
+                    password:password
+                },
+                success:function(res){
+                    console.log(res)
+                }
+            })
+        })
+        //登录
+        $('#signIn').on('click',function(){
+            let name = $('#acc').val()
+            let password = $('#psw').val()
+            $.ajax({
+                url:'http://localhost:3001/pc'+'/login/signIn',
+                method:'post',
+                dataType:'json',
+                data:{
+                    name:name,
+                    password:password
+                },
+                success:function(res){
+                    if(res.code==200){
+                        window.location.href='http://localhost:3001/'
+                    }
+                }
+            })
+        })
+	})
+</script>
+{% endblock %}
